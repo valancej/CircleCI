@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  anchore:
+    docker:
+      - image: anchore/engine-cli:latest
+    steps:
+      - run:
+          name: Anchore Scan
+          command: |
+            anchore-cli image add $ANCHORE_CLI_IMAGE
