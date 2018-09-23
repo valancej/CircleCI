@@ -2,8 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image:
+      - image: anchore/engine-cli:latest
     steps:
-      - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - run:
+          name: Anchore Scan
+          command: |
+            anchore-cli image add $ANCHORE_CLI_IMAGE
