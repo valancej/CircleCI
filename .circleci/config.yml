@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  anchore:
+  build:
     docker:
       - image: anchore/engine-cli:latest
     steps:
