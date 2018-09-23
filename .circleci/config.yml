@@ -8,9 +8,9 @@ jobs:
           name: Anchore Scan
           command: |
             echo "Adding image to Anchore Engine"
-            anchore-cli image add $ANCHORE_CLI_IMAGE
+            anchore-cli image add $ANCHORE_SCAN_IMAGE
             echo "Waiting for image analysis to complete"
             counter=0
-            while (! (anchore-cli image get ${{ANCHORE_SCAN_IMAGE}} | grep 'Status\:\ analyzed') ) ; do echo -n "." ; sleep 10 ; if [ $counter -eq ${{ANCHORE_RETRIES}} ] ; then echo " Timeout waiting for analysis" ; exit 1 ; fi ; counter=$(($counter+1)) ; done
+            while (! (anchore-cli image get $ANCHORE_SCAN_IMAGE | grep 'Status\:\ analyzed') ) ; do echo -n "." ; sleep 10 ; if [ $counter -eq $ANCHORE_RETRIES ] ; then echo " Timeout waiting for analysis" ; exit 1 ; fi ; counter=$(($counter+1)) ; done
             echo "Analysis complete"
-            if [ "${{ANCHORE_FAIL_ON_POLICY}}" == "true" ] ; then anchore-cli evaluate check ${{ANCHORE_SCAN_IMAGE}}  ; fi            
+            if [ "$ANCHORE_FAIL_ON_POLICY" == "true" ] ; then anchore-cli evaluate check $ANCHORE_SCAN_IMAGE  ; fi            
