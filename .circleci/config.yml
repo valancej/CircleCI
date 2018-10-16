@@ -4,7 +4,14 @@ jobs:
     docker:
       - image: anchore/engine-cli:latest
     steps:
+      - checkout
+      - setup_remote_docker:
+        docker_layer_caching: true
       - run:
+          name: Build and push Docker image
+          command: |
+            docker build -t jvalance/sampledockerfiles
+      - run:      
           name: Anchore Scan
           command: |
             echo "Adding image to Anchore Engine"
