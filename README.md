@@ -1,6 +1,6 @@
 # Integrating Anchore scanning with CircleCI
 
-## Introduction
+## Introduction HERE
 
 This will walkthrough integrating Anchore scanning into a CircleCI pipeline. During the first step, a Docker image will be built from a Dockerfile. Following this, during the second step Anchore will scan the image, and depending on the result of the policy evaluation, proceed to the final step. During the final step the built image will be pushed to a Docker registry.
 
